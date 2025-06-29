@@ -13,17 +13,6 @@ export const getConnectionPoints = (fromNode, toNode) => {
   const fromCenter = getNodeCenter(fromNode);
   const toCenter = getNodeCenter(toNode);
 
-  // Calculate the angle between nodes
-  const angle = Math.atan2(
-    toCenter.y - fromCenter.y,
-    toCenter.x - fromCenter.x
-  );
-
-  // Calculate connection points on the edges of the nodes
-  // Use proper edge detection based on node shape
-  const fromRadius = Math.min(fromNode.width, fromNode.height) / 2;
-  const toRadius = Math.min(toNode.width, toNode.height) / 2;
-
   // For better connection points, calculate based on actual node bounds
   const fromBounds = getNodeBounds(fromNode);
   const toBounds = getNodeBounds(toNode);
