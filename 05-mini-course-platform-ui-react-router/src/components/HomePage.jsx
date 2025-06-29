@@ -1,9 +1,10 @@
-import { Link } from 'react-router-dom';
-import { coursesData } from '../data/coursesData';
+import { ArrowRight, CheckCircle, Clock } from "lucide-react";
+import { Link } from "react-router";
+import { coursesData } from "../data/coursesData";
 
 /**
  * HomePage Component
- * 
+ *
  * Displays a grid of available courses with links to individual course pages.
  * This component demonstrates:
  * - Using Link component for navigation
@@ -34,17 +35,14 @@ function HomePage() {
             Available Courses
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Choose from our carefully crafted courses designed to take your skills to the next level
+            Choose from our carefully crafted courses designed to take your
+            skills to the next level
           </p>
         </div>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {coursesData.map((course, index) => (
-            <CourseCard 
-              key={course.id} 
-              course={course} 
-              index={index}
-            />
+            <CourseCard key={course.id} course={course} index={index} />
           ))}
         </div>
       </main>
@@ -54,23 +52,23 @@ function HomePage() {
 
 /**
  * CourseCard Component
- * 
+ *
  * Displays individual course information in a card format.
  * Uses React Router's Link component for navigation.
- * 
+ *
  * @param {Object} props - Component props
  * @param {Object} props.course - Course data object
  * @param {number} props.index - Card index for staggered animation
  */
 function CourseCard({ course, index }) {
   return (
-    <div 
+    <div
       className="card card-hover animate-slide-up"
       style={{ animationDelay: `${index * 0.1}s` }}
     >
       <div className="relative">
-        <img 
-          src={course.image} 
+        <img
+          src={course.image}
           alt={course.title}
           className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
         />
@@ -80,7 +78,7 @@ function CourseCard({ course, index }) {
           </span>
         </div>
       </div>
-      
+
       <div className="p-6">
         <h3 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2">
           {course.title}
@@ -88,31 +86,25 @@ function CourseCard({ course, index }) {
         <p className="text-gray-600 mb-4 line-clamp-3 leading-relaxed">
           {course.description}
         </p>
-        
+
         <div className="flex items-center gap-4 mb-6 text-sm text-gray-500">
           <div className="flex items-center gap-1">
-            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
-            </svg>
+            <Clock className="w-4 h-4" />
             <span>{course.duration}</span>
           </div>
           <div className="flex items-center gap-1">
-            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
+            <CheckCircle className="w-4 h-4" />
             <span>{course.lessons.length} lessons</span>
           </div>
         </div>
-        
+
         {/* Link to course details page */}
-        <Link 
-          to={`/courses/${course.id}`} 
+        <Link
+          to={`/courses/${course.id}`}
           className="inline-flex items-center gap-2 text-primary-600 hover:text-primary-700 font-semibold transition-colors duration-200 group"
         >
           Start Learning
-          <svg className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" fill="currentColor" viewBox="0 0 20 20">
-            <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
-          </svg>
+          <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
         </Link>
       </div>
     </div>

@@ -1,5 +1,5 @@
 {
-  "name": "mini-course-platform",
+  "name": "workout-logger",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -10,10 +10,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "chart.js": "^4.4.0",
+    "date-fns": "^2.30.0",
+    "lucide-react": "^0.525.0",
+    "papaparse": "^5.5.3",
     "react": "^19.0.0",
+    "react-chartjs-2": "^5.2.0",
     "react-dom": "^19.0.0",
     "react-router": "^7.6.3",
-    "lucide-react": "^0.525.0"
+    "zustand": "^4.4.7"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.1",

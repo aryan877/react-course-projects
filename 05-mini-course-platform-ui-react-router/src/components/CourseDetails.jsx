@@ -1,4 +1,5 @@
-import { Link, useParams } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
+import { Link, useParams } from "react-router";
 import { getCourseById } from "../data/coursesData";
 
 /**
@@ -102,17 +103,7 @@ function CourseDetails() {
           className="inline-flex items-center gap-2 bg-primary-600 hover:bg-primary-700 text-white font-semibold px-6 py-3 rounded-lg transition-colors duration-200 group"
         >
           Start with &quot;{course.lessons[0].title}&quot;
-          <svg
-            className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-          >
-            <path
-              fillRule="evenodd"
-              d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-              clipRule="evenodd"
-            />
-          </svg>
+          <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
         </Link>
       </div>
     </div>
