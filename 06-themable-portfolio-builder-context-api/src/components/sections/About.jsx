@@ -1,15 +1,14 @@
-import React from 'react';
-import { User, Download } from 'lucide-react';
-import { useTheme } from '../../context/ThemeContext';
-import Section from '../ui/Section';
-import Card from '../ui/Card';
-import Button from '../ui/Button';
+import { Download, User } from "lucide-react";
+import { useTheme } from "../../hooks/useTheme";
+import Button from "../ui/Button";
+import Card from "../ui/Card";
+import Section from "../ui/Section";
 
 const About = () => {
-  const { isDarkMode, typography, colors } = useTheme();
+  const { isDarkMode, typography } = useTheme();
 
-  const textColor = isDarkMode ? 'text-gray-200' : 'text-gray-800';
-  const highlightColor = isDarkMode ? 'text-blue-300' : 'text-blue-800';
+  const textColor = isDarkMode ? "text-gray-200" : "text-gray-800";
+  const highlightColor = isDarkMode ? "text-blue-300" : "text-blue-800";
 
   return (
     <Section id="about" title="About Me">
@@ -33,27 +32,32 @@ const About = () => {
         {/* About Content */}
         <div>
           <Card>
-            <h3 className={`${typography.headingSize} font-bold mb-6 ${highlightColor}`}>
-              Hello, I'm John Doe
+            <h3
+              className={`${typography.headingSize} font-bold mb-6 ${highlightColor}`}
+            >
+              Hello, I&apos;m John Doe
             </h3>
-            <p className={`${typography.bodySize} ${textColor} mb-6 leading-relaxed font-semibold`}>
-              I'm a passionate full-stack developer with over 5 years of experience creating 
-              beautiful and functional web applications. I specialize in React, Node.js, and 
-              modern web technologies.
+            <p
+              className={`${typography.bodySize} ${textColor} mb-6 leading-relaxed font-semibold`}
+            >
+              I&apos;m a passionate full-stack developer with over 5 years of
+              experience creating beautiful and functional web applications. I
+              specialize in React, Node.js, and modern web technologies.
             </p>
-            <p className={`${typography.bodySize} ${textColor} mb-6 leading-relaxed font-semibold`}>
-              When I'm not coding, you can find me exploring new technologies, contributing to 
-              open-source projects, or sharing my knowledge through technical writing and mentoring.
+            <p
+              className={`${typography.bodySize} ${textColor} mb-6 leading-relaxed font-semibold`}
+            >
+              When I&apos;m not coding, you can find me exploring new
+              technologies, contributing to open-source projects, or sharing my
+              knowledge through technical writing and mentoring.
             </p>
-            
+
             <div className="flex flex-wrap gap-4">
               <Button variant="primary" className="flex items-center gap-2">
                 <Download size={16} />
                 Download Resume
               </Button>
-              <Button variant="outline">
-                Contact Me
-              </Button>
+              <Button variant="outline">Contact Me</Button>
             </div>
           </Card>
         </div>

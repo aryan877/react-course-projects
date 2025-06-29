@@ -1,10 +1,9 @@
 import { ChevronDown, Sparkles } from "lucide-react";
-import React from "react";
-import { useTheme } from "../../context/ThemeContext";
+import { useTheme } from "../../hooks/useTheme";
 import Button from "../ui/Button";
 
 const Hero = () => {
-  const { isDarkMode, typography, colors } = useTheme();
+  const { isDarkMode, typography } = useTheme();
 
   const backgroundGradient = isDarkMode
     ? "bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900"
@@ -44,7 +43,7 @@ const Hero = () => {
         <h1
           className={`${typography.headingSize} md:text-6xl font-bold ${textColor} mb-6 leading-tight`}
         >
-          Hi, I'm{" "}
+          Hi, I&apos;m{" "}
           <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
             John Doe
           </span>

@@ -1,44 +1,49 @@
-import React from 'react';
-import { ExternalLink, Github, Code2 } from 'lucide-react';
-import { useTheme } from '../../context/ThemeContext';
-import Section from '../ui/Section';
-import Card from '../ui/Card';
-import Button from '../ui/Button';
+import { Code2, ExternalLink, Github } from "lucide-react";
+import { useTheme } from "../../hooks/useTheme";
+import Button from "../ui/Button";
+import Card from "../ui/Card";
+import Section from "../ui/Section";
 
 const Projects = () => {
   const { isDarkMode, typography } = useTheme();
 
-  const textColor = isDarkMode ? 'text-gray-200' : 'text-gray-800';
-  const titleColor = isDarkMode ? 'text-white' : 'text-gray-900';
+  const textColor = isDarkMode ? "text-gray-200" : "text-gray-800";
+  const titleColor = isDarkMode ? "text-white" : "text-gray-900";
 
   const projects = [
     {
       id: 1,
-      title: 'E-Commerce Platform',
-      description: 'A full-featured e-commerce platform built with React, Node.js, and MongoDB. Features include user authentication, payment processing, and admin dashboard.',
-      image: 'https://images.pexels.com/photos/230544/pexels-photo-230544.jpeg?auto=compress&cs=tinysrgb&w=800',
-      technologies: ['React', 'Node.js', 'MongoDB', 'Stripe'],
-      liveUrl: '#',
-      githubUrl: '#'
+      title: "E-Commerce Platform",
+      description:
+        "A full-featured e-commerce platform built with React, Node.js, and MongoDB. Features include user authentication, payment processing, and admin dashboard.",
+      image:
+        "https://images.pexels.com/photos/230544/pexels-photo-230544.jpeg?auto=compress&cs=tinysrgb&w=800",
+      technologies: ["React", "Node.js", "MongoDB", "Stripe"],
+      liveUrl: "#",
+      githubUrl: "#",
     },
     {
       id: 2,
-      title: 'Task Management App',
-      description: 'A collaborative task management application with real-time updates, drag-and-drop functionality, and team collaboration features.',
-      image: 'https://images.pexels.com/photos/3183153/pexels-photo-3183153.jpeg?auto=compress&cs=tinysrgb&w=800',
-      technologies: ['Vue.js', 'Firebase', 'Vuex', 'CSS3'],
-      liveUrl: '#',
-      githubUrl: '#'
+      title: "Task Management App",
+      description:
+        "A collaborative task management application with real-time updates, drag-and-drop functionality, and team collaboration features.",
+      image:
+        "https://images.pexels.com/photos/3183153/pexels-photo-3183153.jpeg?auto=compress&cs=tinysrgb&w=800",
+      technologies: ["Vue.js", "Firebase", "Vuex", "CSS3"],
+      liveUrl: "#",
+      githubUrl: "#",
     },
     {
       id: 3,
-      title: 'Weather Dashboard',
-      description: 'A responsive weather dashboard that provides detailed weather information with beautiful data visualizations and location-based forecasts.',
-      image: 'https://images.pexels.com/photos/1118873/pexels-photo-1118873.jpeg?auto=compress&cs=tinysrgb&w=800',
-      technologies: ['JavaScript', 'Chart.js', 'Weather API', 'CSS3'],
-      liveUrl: '#',
-      githubUrl: '#'
-    }
+      title: "Weather Dashboard",
+      description:
+        "A responsive weather dashboard that provides detailed weather information with beautiful data visualizations and location-based forecasts.",
+      image:
+        "https://images.pexels.com/photos/1118873/pexels-photo-1118873.jpeg?auto=compress&cs=tinysrgb&w=800",
+      technologies: ["JavaScript", "Chart.js", "Weather API", "CSS3"],
+      liveUrl: "#",
+      githubUrl: "#",
+    },
   ];
 
   return (
@@ -70,7 +75,9 @@ const Projects = () => {
               <h3 className={`text-xl font-bold mb-3 ${titleColor}`}>
                 {project.title}
               </h3>
-              <p className={`${typography.bodySize} ${textColor} mb-4 leading-relaxed font-semibold`}>
+              <p
+                className={`${typography.bodySize} ${textColor} mb-4 leading-relaxed font-semibold`}
+              >
                 {project.description}
               </p>
 
@@ -81,8 +88,8 @@ const Projects = () => {
                     key={tech}
                     className={`px-3 py-1 text-sm rounded-full font-semibold border shadow-sm ${
                       isDarkMode
-                        ? 'bg-blue-900/40 text-blue-200 border-blue-700'
-                        : 'bg-blue-600 text-white border-blue-700'
+                        ? "bg-blue-900/40 text-blue-200 border-blue-700"
+                        : "bg-blue-600 text-white border-blue-700"
                     }`}
                   >
                     {tech}
@@ -92,11 +99,19 @@ const Projects = () => {
 
               {/* Project Links */}
               <div className="flex gap-3">
-                <Button size="sm" variant="primary" className="flex items-center gap-2">
+                <Button
+                  size="sm"
+                  variant="primary"
+                  className="flex items-center gap-2"
+                >
                   <ExternalLink size={14} />
                   Live Demo
                 </Button>
-                <Button size="sm" variant="outline" className="flex items-center gap-2">
+                <Button
+                  size="sm"
+                  variant="outline"
+                  className="flex items-center gap-2"
+                >
                   <Github size={14} />
                   Code
                 </Button>

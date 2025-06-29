@@ -7,8 +7,8 @@ import {
   Send,
   Twitter,
 } from "lucide-react";
-import React, { useState } from "react";
-import { useTheme } from "../../context/ThemeContext";
+import { useState } from "react";
+import { useTheme } from "../../hooks/useTheme";
 import Button from "../ui/Button";
 import Card from "../ui/Card";
 import Section from "../ui/Section";
@@ -38,8 +38,6 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log("Form submitted:", formData);
   };
 
   const contactInfo = [
@@ -76,9 +74,9 @@ const Contact = () => {
           <p
             className={`${typography.bodySize} ${textColor} max-w-2xl mx-auto font-semibold`}
           >
-            I'm always interested in hearing about new opportunities and
+            I&apos;m always interested in hearing about new opportunities and
             interesting projects. Whether you have a question or just want to
-            say hi, I'll try my best to get back to you!
+            say hi, Ill try my best to get back to you!
           </p>
         </div>
 
@@ -215,8 +213,9 @@ const Contact = () => {
               <p
                 className={`${typography.bodySize} ${textColor} font-semibold`}
               >
-                I'm currently available for freelance projects and full-time
-                opportunities. I typically respond to messages within 24 hours.
+                I&apos;m currently available for freelance projects and
+                full-time opportunities. I typically respond to messages within
+                24 hours.
               </p>
               <div className="mt-4 flex items-center gap-2">
                 <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>

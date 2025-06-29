@@ -1,6 +1,6 @@
 import { Menu, Settings, X } from "lucide-react";
-import React, { useState } from "react";
-import { useTheme } from "../context/ThemeContext";
+import { useState } from "react";
+import { useTheme } from "../hooks/useTheme";
 import Button from "./ui/Button";
 
 const Navigation = ({ onToggleSettings }) => {
