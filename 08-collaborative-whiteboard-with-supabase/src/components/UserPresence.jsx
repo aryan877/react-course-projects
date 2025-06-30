@@ -61,36 +61,12 @@ export function UserPresence({
   };
 
   /**
-   * Handles sharing the whiteboard. It uses the Web Share API if available,
-   * otherwise falls back to copying the URL to the clipboard.
+   * Handles sharing the whiteboard by copying the URL to the clipboard.
    */
   const shareWhiteboard = async () => {
     const url = `${window.location.origin}/?whiteboard=${whiteboardId}`;
-
-    if (navigator.share) {
-      try {
-        await navigator.share({
-          title: whiteboardTitle,
-          text: "Check out this collaborative whiteboard!",
-          url,
-        });
-        setShareSuccess(true);
-        setTimeout(() => setShareSuccess(false), 2000);
-      } catch {
-        copyToClipboard(url);
-      }
-    } else {
-      copyToClipboard(url);
-    }
-  };
-
-  /**
-   * Helper function to copy text to the user's clipboard.
-   * @param {string} text - The text to copy.
-   */
-  const copyToClipboard = async (text) => {
     try {
-      await navigator.clipboard.writeText(text);
+      await navigator.clipboard.writeText(url);
       setShareSuccess(true);
       setTimeout(() => setShareSuccess(false), 2000);
     } catch (error) {
