@@ -28,7 +28,7 @@ export const WhiteboardCanvas = memo(function WhiteboardCanvas({
   cursors,
   elements,
   saveElement,
-  deleteElement,
+  deleteElements,
   updateCursorPosition,
 }) {
   const canvasRef = useRef(null);
@@ -90,7 +90,7 @@ export const WhiteboardCanvas = memo(function WhiteboardCanvas({
       updateCursorPosition,
       drawPath,
       drawSegment,
-      deleteElements: deleteElement,
+      deleteElements,
       redrawCanvas,
       drawPreview,
       saveElement,

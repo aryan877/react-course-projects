@@ -106,13 +106,14 @@ export function useCanvasInteraction({
       const point = getCanvasCoordinates(e);
       if (!point) return;
 
+      setIsDrawing(true);
+      elementsToDeleteRef.current.clear();
+
       if (tool === "eraser") {
-        setIsDrawing(true);
-        elementsToDeleteRef.current.clear();
         const elementToDelete = findElementAtPoint(point);
         if (elementToDelete) {
           elementsToDeleteRef.current.add(elementToDelete.id);
-          deleteElements([elementToDelete.id]);
+          redrawCanvas(elementsToDeleteRef.current);
         }
         return;
       }
@@ -122,10 +123,9 @@ export function useCanvasInteraction({
         if (text) {
           saveElement("text", { text, x: point.x, y: point.y });
         }
+        setIsDrawing(false); // Text is a single-click action
         return;
       }
-
-      setIsDrawing(true);
 
       startPointRef.current = point;
       lastPointRef.current = point;
@@ -143,7 +143,7 @@ export function useCanvasInteraction({
       lastPointRef,
       saveElement,
       findElementAtPoint,
-      deleteElements,
+      redrawCanvas,
     ]
   );
 
@@ -170,14 +170,14 @@ export function useCanvasInteraction({
         }
         currentPathRef.current.push(point);
       } else if (tool === "eraser") {
-        // For the eraser, continuously check for and delete elements under the cursor.
+        // For the eraser, continuously check for and add elements to the delete set.
         const elementToDelete = findElementAtPoint(point);
         if (
           elementToDelete &&
           !elementsToDeleteRef.current.has(elementToDelete.id)
         ) {
           elementsToDeleteRef.current.add(elementToDelete.id);
-          deleteElements([elementToDelete.id]);
+          redrawCanvas(elementsToDeleteRef.current);
         }
       } else {
         // For other tools (shapes), update the preview.
@@ -200,7 +200,6 @@ export function useCanvasInteraction({
       drawSegment,
       findElementAtPoint,
       lastPointRef,
-      deleteElements,
     ]
   );
 
@@ -213,7 +212,11 @@ export function useCanvasInteraction({
     setIsDrawing(false);
 
     if (tool === "eraser") {
+      if (elementsToDeleteRef.current.size > 0) {
+        deleteElements(Array.from(elementsToDeleteRef.current));
+      }
       elementsToDeleteRef.current.clear();
+      // After deleting, the redraw is triggered by the parent's `elements` state updating.
       return;
     }
 
@@ -276,6 +279,7 @@ export function useCanvasInteraction({
     startPointRef,
     lastPointRef,
     redrawCanvas,
+    deleteElements,
   ]);
 
   return { handleMouseDown, handleMouseMove, handleMouseUp };

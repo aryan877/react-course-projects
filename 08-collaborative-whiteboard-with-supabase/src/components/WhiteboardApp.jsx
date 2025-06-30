@@ -41,29 +41,17 @@ export function WhiteboardApp({ user, profile, onSignOut, onUpdateProfile }) {
   const [activeUsers, setActiveUsers] = useState([]);
   const [cursors, setCursors] = useState(new Map());
 
-  // This hook manages all local, non-synced canvas state.
-  const [canvasData, setCanvasData] = useState({
-    tool: "pen",
-    color: "#000000",
-    strokeWidth: 2,
-    elements: [],
-    undoStack: [],
-    redoStack: [],
-  });
-
-  const { tool, color, strokeWidth, elements, undoStack, redoStack } =
-    canvasData;
-
-  const canUndo = undoStack.length > 0;
-  const canRedo = redoStack.length > 0;
-
-  const setTool = (tool) => setCanvasData((prev) => ({ ...prev, tool }));
-  const setColor = (color) => setCanvasData((prev) => ({ ...prev, color }));
-  const setStrokeWidth = (strokeWidth) =>
-    setCanvasData((prev) => ({ ...prev, strokeWidth }));
-
-  // This custom hook manages all data interactions for the whiteboard.
+  // This custom hook now manages all data and state for the whiteboard.
   const {
+    tool,
+    color,
+    strokeWidth,
+    elements,
+    canUndo,
+    canRedo,
+    setTool,
+    setColor,
+    setStrokeWidth,
     saveElement,
     deleteElements,
     updateCursorPosition,
@@ -74,17 +62,7 @@ export function WhiteboardApp({ user, profile, onSignOut, onUpdateProfile }) {
     whiteboardId,
     presenceChannel,
     currentUser: profile,
-    canvasData,
-    setCanvasData,
   });
-
-  const handleUndo = useCallback(() => {
-    undo();
-  }, [undo]);
-
-  const handleRedo = useCallback(() => {
-    redo();
-  }, [redo]);
 
   /**
    * Initializes the whiteboard session.
@@ -249,8 +227,8 @@ export function WhiteboardApp({ user, profile, onSignOut, onUpdateProfile }) {
         setColor={setColor}
         strokeWidth={strokeWidth}
         setStrokeWidth={setStrokeWidth}
-        onUndo={handleUndo}
-        onRedo={handleRedo}
+        onUndo={undo}
+        onRedo={redo}
         onClear={clearAllElements}
         canUndo={canUndo}
         canRedo={canRedo}
@@ -281,7 +259,7 @@ export function WhiteboardApp({ user, profile, onSignOut, onUpdateProfile }) {
             cursors={cursors}
             elements={elements}
             saveElement={saveElement}
-            deleteElement={deleteElements}
+            deleteElements={deleteElements}
             updateCursorPosition={updateCursorPosition}
           />
         </div>

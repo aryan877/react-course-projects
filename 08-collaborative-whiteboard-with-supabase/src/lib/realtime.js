@@ -23,10 +23,6 @@ export const getElementsChannel = (whiteboardId) => {
 
 export const subscribeToElementsChannel = (channel, handlers) => {
   channel
-    .on("broadcast", { event: "element-add" }, handlers.onElementAdd)
-    .on("broadcast", { event: "elements-insert" }, handlers.onElementsInsert)
-    .on("broadcast", { event: "elements-delete" }, handlers.onElementsDelete)
-    .on("broadcast", { event: "canvas-clear" }, handlers.onCanvasClear)
     .on("broadcast", { event: "state-replace" }, handlers.onStateReplace)
     .subscribe();
   return channel;
@@ -34,38 +30,6 @@ export const subscribeToElementsChannel = (channel, handlers) => {
 
 const getBroadcastingChannel = (whiteboardId) => {
   return supabase.channel(elementsChannelName(whiteboardId));
-};
-
-export const broadcastElementAdd = (whiteboardId, element) => {
-  return getBroadcastingChannel(whiteboardId).send({
-    type: "broadcast",
-    event: "element-add",
-    payload: { element },
-  });
-};
-
-export const broadcastElementsInsert = (whiteboardId, elements) => {
-  return getBroadcastingChannel(whiteboardId).send({
-    type: "broadcast",
-    event: "elements-insert",
-    payload: { elements },
-  });
-};
-
-export const broadcastElementsDelete = (whiteboardId, elementIds) => {
-  return getBroadcastingChannel(whiteboardId).send({
-    type: "broadcast",
-    event: "elements-delete",
-    payload: { elementIds },
-  });
-};
-
-export const broadcastCanvasClear = (whiteboardId) => {
-  return getBroadcastingChannel(whiteboardId).send({
-    type: "broadcast",
-    event: "canvas-clear",
-    payload: {},
-  });
 };
 
 /**

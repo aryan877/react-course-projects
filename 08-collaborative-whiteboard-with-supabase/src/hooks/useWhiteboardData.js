@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import {
   deleteAllElementsForWhiteboard,
@@ -29,21 +29,40 @@ import {
  * @param {string} params.whiteboardId - The ID of the current whiteboard.
  * @param {import('@supabase/realtime-js').RealtimeChannel} params.presenceChannel - The Supabase presence channel instance.
  * @param {object} params.currentUser - The profile of the currently logged-in user.
- * @param {function} setCanvasData - Function to update the entire canvas data state.
- * @returns {object} An object containing the elements and functions to manipulate them.
+ * @returns {object} An object containing the canvas state and functions to manipulate it.
  */
 export function useWhiteboardData({
   whiteboardId,
   presenceChannel,
   currentUser,
-  canvasData,
-  setCanvasData,
 }) {
+  const [canvasData, setCanvasData] = useState({
+    tool: "pen",
+    color: "#000000",
+    strokeWidth: 2,
+    elements: [],
+    undoStack: [],
+    redoStack: [],
+  });
+
   const { elements, color, strokeWidth, tool, undoStack, redoStack } =
     canvasData;
 
   const canUndo = undoStack.length > 0;
   const canRedo = redoStack.length > 0;
+
+  const setTool = useCallback(
+    (tool) => setCanvasData((prev) => ({ ...prev, tool })),
+    []
+  );
+  const setColor = useCallback(
+    (color) => setCanvasData((prev) => ({ ...prev, color })),
+    []
+  );
+  const setStrokeWidth = useCallback(
+    (strokeWidth) => setCanvasData((prev) => ({ ...prev, strokeWidth })),
+    []
+  );
 
   const broadcastState = useCallback(
     (newState) => {
@@ -280,7 +299,7 @@ export function useWhiteboardData({
     } catch (error) {
       console.error("Error loading elements:", error);
     }
-  }, [whiteboardId, setCanvasData]);
+  }, [whiteboardId]);
 
   // Main effect for setting up real-time subscriptions.
   useEffect(() => {
@@ -330,5 +349,14 @@ export function useWhiteboardData({
     deleteElements,
     updateCursorPosition,
     clearAllElements,
+    tool,
+    color,
+    strokeWidth,
+    elements,
+    canUndo,
+    canRedo,
+    setTool,
+    setColor,
+    setStrokeWidth,
   };
 }

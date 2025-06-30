@@ -45,17 +45,17 @@ export function Toolbar({
   setColor,
   strokeWidth,
   setStrokeWidth,
-  onUndo, // → handleUndo in WhiteboardApp → canvasRef.current.undo()
-  onRedo, // → handleRedo in WhiteboardApp → canvasRef.current.redo()
-  onClear, // → handleClear in WhiteboardApp → canvasRef.current.clear()
-  canUndo, // from canvas undoRedoState callback → enables/disables button
-  canRedo, // from canvas undoRedoState callback → enables/disables button
+  onUndo,
+  onRedo,
+  onClear,
+  canUndo,
+  canRedo,
 }) {
   const [showColorPicker, setShowColorPicker] = useState(false);
   const [showStrokePicker, setShowStrokePicker] = useState(false);
 
   return (
-    <div className="absolute top-20 left-1/2 transform -translate-x-1/2 z-50">
+    <div className="absolute top-20 left-1/2 transform -translate-x-1/2 z-40">
       <div className="bg-white/95 backdrop-blur-xl rounded-xl shadow-xl shadow-black/10 border border-white/30 px-3 py-2">
         <div className="flex items-center gap-1">
           {/* ======================================================================== */}

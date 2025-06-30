@@ -134,29 +134,6 @@ export const deleteAllElementsForWhiteboard = (whiteboardId) => {
     .eq("whiteboard_id", whiteboardId);
 };
 
-/**
- * Replaces all elements for a whiteboard. This is a non-atomic operation
- * that first deletes all existing elements, then inserts the new ones.
- * For a truly atomic operation, a database function (RPC) would be required.
- * @param {string} whiteboardId - The UUID of the whiteboard.
- * @param {Array<object>} elements - The new array of elements to insert.
- * @returns {Promise} A Supabase query promise.
- */
-export const replaceAllElementsForWhiteboard = async (
-  whiteboardId,
-  elements
-) => {
-  const { error: deleteError } = await deleteAllElementsForWhiteboard(
-    whiteboardId
-  );
-  if (deleteError) return { error: deleteError };
-
-  // Don't insert if there are no elements to avoid an unnecessary call.
-  if (elements.length === 0) return { error: null };
-
-  return insertMultipleElements(elements);
-};
-
 // ============================================================================
 // Cursor Functions
 // ============================================================================

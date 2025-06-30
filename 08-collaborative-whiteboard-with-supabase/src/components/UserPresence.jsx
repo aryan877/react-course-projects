@@ -81,7 +81,7 @@ export function UserPresence({
   return (
     <>
       {/* Top Navigation Bar */}
-      <div className="absolute top-4 left-4 right-4 z-30 flex items-center justify-between">
+      <div className="absolute top-4 left-4 right-4 z-50 flex items-center justify-between">
         {/* Title Section */}
         <div className="bg-white/95 backdrop-blur-xl rounded-xl shadow-lg shadow-black/5 border border-white/30 px-4 py-2 max-w-md">
           {isEditingTitle ? (
@@ -209,7 +209,7 @@ export function UserPresence({
             </button>
 
             {showUserMenu && (
-              <div className="absolute top-full right-0 mt-2 w-48 bg-white/95 backdrop-blur-xl rounded-xl shadow-xl shadow-black/20 border border-white/30 py-1 z-50">
+              <div className="absolute top-full right-0 mt-2 w-48 bg-white/95 backdrop-blur-xl rounded-xl shadow-xl shadow-black/20 border border-white/30 py-1 z-[110]">
                 <button
                   onClick={onSignOut}
                   className="w-full px-3 py-2 text-left hover:bg-red-50/80 flex items-center gap-2 text-red-600 hover:text-red-700 transition-colors text-sm"
