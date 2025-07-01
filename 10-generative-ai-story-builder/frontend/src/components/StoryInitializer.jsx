@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Loader2, Wand2 } from "lucide-react";
-import React, { useState } from "react";
+import { useState } from "react";
 
 const StoryInitializer = ({ onStartStory, isGenerating }) => {
   const [prompt, setPrompt] = useState("");
@@ -43,7 +43,7 @@ const StoryInitializer = ({ onStartStory, isGenerating }) => {
     }
   };
 
-  const useExamplePrompt = (examplePrompt) => {
+  const selectExamplePrompt = (examplePrompt) => {
     setPrompt(examplePrompt);
   };
 
@@ -100,10 +100,10 @@ const StoryInitializer = ({ onStartStory, isGenerating }) => {
               <button
                 key={index}
                 type="button"
-                onClick={() => useExamplePrompt(example)}
+                onClick={() => selectExamplePrompt(example)}
                 className="text-left p-3 bg-gray-50 hover:bg-primary-50 rounded-lg text-sm text-gray-700 hover:text-primary-700 transition-colors duration-200 border border-transparent hover:border-primary-200"
               >
-                "{example}"
+                {`"${example}"`}
               </button>
             ))}
           </div>

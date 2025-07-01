@@ -1,30 +1,30 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { Sparkles, BookOpen, Image, Share2, ArrowRight } from 'lucide-react';
+import { motion } from "framer-motion";
+import { ArrowRight, BookOpen, Image, Share2, Sparkles } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const HomePage = () => {
   const features = [
     {
       icon: Sparkles,
-      title: 'AI-Powered Stories',
-      description: 'Generate unique, engaging narratives with advanced AI technology'
+      title: "AI-Powered Stories",
+      description:
+        "Generate unique, engaging narratives with advanced AI technology",
     },
     {
       icon: BookOpen,
-      title: 'Interactive Choices',
-      description: 'Create branching storylines where every choice matters'
+      title: "Interactive Choices",
+      description: "Create branching storylines where every choice matters",
     },
     {
       icon: Image,
-      title: 'Visual Storytelling',
-      description: 'Bring your stories to life with AI-generated images'
+      title: "Visual Storytelling",
+      description: "Bring your stories to life with AI-generated images",
     },
     {
       icon: Share2,
-      title: 'Share & Export',
-      description: 'Share your creations with the world or export them'
-    }
+      title: "Share & Export",
+      description: "Share your creations with the world or export them",
+    },
   ];
 
   return (
@@ -38,15 +38,16 @@ const HomePage = () => {
             transition={{ duration: 0.8 }}
           >
             <h1 className="text-5xl lg:text-7xl font-bold text-gray-900 mb-6">
-              Create{' '}
+              Create{" "}
               <span className="bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent">
                 Interactive Stories
-              </span>{' '}
+              </span>{" "}
               with AI
             </h1>
             <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto leading-relaxed">
-              Unleash your creativity with our AI-powered story builder. Generate compelling narratives, 
-              create branching adventures, and bring your imagination to life with stunning visuals.
+              Unleash your creativity with our AI-powered story builder.
+              Generate compelling narratives, create branching adventures, and
+              bring your imagination to life with stunning visuals.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Link to="/create">
@@ -86,7 +87,8 @@ const HomePage = () => {
               Everything you need to create amazing stories
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Our platform combines cutting-edge AI with intuitive design to make storytelling accessible to everyone.
+              Our platform combines cutting-edge AI with intuitive design to
+              make storytelling accessible to everyone.
             </p>
           </motion.div>
 
@@ -130,7 +132,8 @@ const HomePage = () => {
               Ready to start your storytelling journey?
             </h2>
             <p className="text-xl opacity-90 mb-8 max-w-2xl mx-auto">
-              Join thousands of creators who are already building amazing interactive stories with AI.
+              Join thousands of creators who are already building amazing
+              interactive stories with AI.
             </p>
             <Link to="/create">
               <motion.button

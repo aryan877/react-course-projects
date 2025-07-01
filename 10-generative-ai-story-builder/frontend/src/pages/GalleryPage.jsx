@@ -62,7 +62,7 @@ const GalleryPage = () => {
             View Your Story Gallery
           </h2>
           <p className="text-gray-600 mb-8">
-            Please log in to see the stories you've created.
+            Please log in to see the stories you&apos;ve created.
           </p>
           <div className="flex gap-4 justify-center">
             <Link to="/login">
@@ -205,7 +205,8 @@ const GalleryPage = () => {
               No stories yet!
             </h3>
             <p className="text-gray-600 mb-6">
-              It looks like you haven't created any stories. Let's change that!
+              It looks like you haven&apos;t created any stories. Let&apos;s
+              change that!
             </p>
             <Link to="/create">
               <motion.button

@@ -19,7 +19,6 @@ const StoryDisplay = ({
   onMakeChoice,
   isGenerating,
   generationStep,
-  currentSegment,
 }) => {
   const [displayedText, setDisplayedText] = useState("");
   const [isTyping, setIsTyping] = useState(true);
