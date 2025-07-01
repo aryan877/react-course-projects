@@ -1,0 +1,9 @@
+{
+  "watch": ["src"],
+  "exec": "node --import=dotenv/config src/server.js",
+  "ext": "js,json",
+  "ignore": ["src/**/*.test.js"],
+  "env": {
+    "NODE_ENV": "development"
+  }
+}
