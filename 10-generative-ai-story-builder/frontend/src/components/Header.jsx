@@ -7,13 +7,13 @@ import {
   Plus,
   UserCircle,
 } from "lucide-react";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import AuthContext from "../contexts/AuthContext";
+import { useAuth } from "../hooks/useAuth";
 
 const Header = () => {
   const location = useLocation();
-  const { user, logout, loading } = useContext(AuthContext);
+  const { user, logout, loading } = useAuth();
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const timeoutRef = useRef(null);
   const dropdownRef = useRef(null);

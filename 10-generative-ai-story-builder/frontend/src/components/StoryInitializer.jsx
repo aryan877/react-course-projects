@@ -1,3 +1,4 @@
+import { EXAMPLE_PROMPTS, STORY_GENRES, STORY_TONES } from "@/lib/constants";
 import { motion } from "framer-motion";
 import { Loader2, Wand2 } from "lucide-react";
 import { useState } from "react";
@@ -6,35 +7,6 @@ const StoryInitializer = ({ onStartStory, isGenerating }) => {
   const [prompt, setPrompt] = useState("");
   const [genre, setGenre] = useState("fantasy");
   const [tone, setTone] = useState("adventurous");
-
-  const genres = [
-    { value: "fantasy", label: "Fantasy" },
-    { value: "sci-fi", label: "Science Fiction" },
-    { value: "mystery", label: "Mystery" },
-    { value: "romance", label: "Romance" },
-    { value: "horror", label: "Horror" },
-    { value: "adventure", label: "Adventure" },
-  ];
-
-  const tones = [
-    { value: "adventurous", label: "Adventurous" },
-    { value: "mysterious", label: "Mysterious" },
-    { value: "humorous", label: "Humorous" },
-    { value: "dramatic", label: "Dramatic" },
-    { value: "romantic", label: "Romantic" },
-    { value: "dark", label: "Dark" },
-    { value: "light", label: "Light" },
-    { value: "serious", label: "Serious" },
-    { value: "whimsical", label: "Whimsical" },
-  ];
-
-  const examplePrompts = [
-    "A detective discovers a hidden room in their apartment building",
-    "An astronaut finds a mysterious artifact on Mars",
-    "A librarian discovers books that can transport readers into their stories",
-    "A chef's recipe accidentally opens a portal to another dimension",
-    "A street artist's graffiti starts coming to life at night",
-  ];
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -96,7 +68,7 @@ const StoryInitializer = ({ onStartStory, isGenerating }) => {
             Or try one of these examples:
           </label>
           <div className="grid grid-cols-1 gap-2">
-            {examplePrompts.map((example, index) => (
+            {EXAMPLE_PROMPTS.map((example, index) => (
               <button
                 key={index}
                 type="button"
@@ -124,7 +96,7 @@ const StoryInitializer = ({ onStartStory, isGenerating }) => {
               onChange={(e) => setGenre(e.target.value)}
               className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent text-gray-900"
             >
-              {genres.map((g) => (
+              {STORY_GENRES.map((g) => (
                 <option key={g.value} value={g.value}>
                   {g.label}
                 </option>
@@ -145,7 +117,7 @@ const StoryInitializer = ({ onStartStory, isGenerating }) => {
               onChange={(e) => setTone(e.target.value)}
               className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent text-gray-900"
             >
-              {tones.map((t) => (
+              {STORY_TONES.map((t) => (
                 <option key={t.value} value={t.value}>
                   {t.label}
                 </option>

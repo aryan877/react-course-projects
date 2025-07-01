@@ -1,36 +1,21 @@
+import { auth } from "@/middleware/auth.js";
+import { asyncHandler } from "@/middleware/errorHandler.js";
+import User from "@/models/User.js";
+import {
+  changePasswordValidator,
+  loginValidator,
+  registerValidator,
+  updateProfileValidator,
+} from "@/validators/authValidators.js";
 import express from "express";
-import { body, validationResult } from "express-validator";
-import { auth } from "../middleware/auth.js";
-import { asyncHandler } from "../middleware/errorHandler.js";
-import User from "../models/User.js";
+import { validationResult } from "express-validator";
 
 const router = express.Router();
 
 // Register new user
 router.post(
   "/register",
-  [
-    body("username")
-      .trim()
-      .isLength({ min: 3, max: 20 })
-      .withMessage("Username must be between 3 and 20 characters")
-      .matches(/^[a-zA-Z0-9_]+$/)
-      .withMessage(
-        "Username can only contain letters, numbers, and underscores"
-      ),
-    body("email")
-      .isEmail()
-      .normalizeEmail()
-      .withMessage("Please enter a valid email"),
-    body("password")
-      .isLength({ min: 6 })
-      .withMessage("Password must be at least 6 characters"),
-    body("displayName")
-      .optional()
-      .trim()
-      .isLength({ max: 50 })
-      .withMessage("Display name cannot exceed 50 characters"),
-  ],
+  registerValidator,
   asyncHandler(async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -90,13 +75,7 @@ router.post(
 // Login user
 router.post(
   "/login",
-  [
-    body("email")
-      .isEmail()
-      .normalizeEmail()
-      .withMessage("Please enter a valid email"),
-    body("password").exists().withMessage("Password is required"),
-  ],
+  loginValidator,
   asyncHandler(async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -180,36 +159,7 @@ router.get(
 // Update user profile
 router.put(
   "/profile",
-  [
-    auth,
-    body("displayName")
-      .optional()
-      .trim()
-      .isLength({ max: 50 })
-      .withMessage("Display name cannot exceed 50 characters"),
-    body("bio")
-      .optional()
-      .trim()
-      .isLength({ max: 500 })
-      .withMessage("Bio cannot exceed 500 characters"),
-    body("avatar").optional().isURL().withMessage("Avatar must be a valid URL"),
-    body("preferences.theme")
-      .optional()
-      .isIn(["light", "dark", "auto"])
-      .withMessage("Invalid theme"),
-    body("preferences.storyGenre")
-      .optional()
-      .isIn([
-        "fantasy",
-        "sci-fi",
-        "mystery",
-        "romance",
-        "horror",
-        "adventure",
-        "any",
-      ])
-      .withMessage("Invalid story genre"),
-  ],
+  [auth, ...updateProfileValidator],
   asyncHandler(async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -258,15 +208,7 @@ router.put(
 // Change password
 router.put(
   "/password",
-  [
-    auth,
-    body("currentPassword")
-      .exists()
-      .withMessage("Current password is required"),
-    body("newPassword")
-      .isLength({ min: 6 })
-      .withMessage("New password must be at least 6 characters"),
-  ],
+  [auth, ...changePasswordValidator],
   asyncHandler(async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {

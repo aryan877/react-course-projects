@@ -1,10 +1,6 @@
+import { AuthContext } from "@/contexts/AuthContext";
+import { getMe, login as loginApi, register as registerApi } from "@/utils/api";
 import { useEffect, useState } from "react";
-import { AuthContext } from "../contexts/AuthContext";
-import {
-  getMe,
-  login as loginApi,
-  register as registerApi,
-} from "../utils/api";
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);

@@ -1,3 +1,4 @@
+import { STORY_GENRES, STORY_TONES } from "@/lib/constants.js";
 import mongoose from "mongoose";
 import { v4 as uuidv4 } from "uuid";
 
@@ -82,32 +83,12 @@ const storySchema = new mongoose.Schema(
     },
     genre: {
       type: String,
-      enum: [
-        "fantasy",
-        "sci-fi",
-        "mystery",
-        "romance",
-        "horror",
-        "adventure",
-        "drama",
-        "comedy",
-        "other",
-      ],
+      enum: STORY_GENRES,
       default: "other",
     },
     tone: {
       type: String,
-      enum: [
-        "adventurous",
-        "dark",
-        "dramatic",
-        "humorous",
-        "light",
-        "mysterious",
-        "romantic",
-        "serious",
-        "whimsical",
-      ],
+      enum: STORY_TONES,
       default: "adventurous",
     },
     author: {

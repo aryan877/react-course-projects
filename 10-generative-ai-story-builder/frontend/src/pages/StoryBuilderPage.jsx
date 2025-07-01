@@ -1,320 +1,33 @@
 import StoryDisplay from "@/components/StoryDisplay";
 import StoryInitializer from "@/components/StoryInitializer";
 import StoryTree from "@/components/StoryTree";
-import AuthContext from "@/contexts/AuthContext";
-import {
-  addStorySegment,
-  completeStory,
-  continueStory,
-  createStory,
-  generateChoices,
-  generateImage,
-  generateStory,
-  getStoryForEdit,
-} from "@/utils/api";
+import { useStoryBuilder } from "@/hooks/useStoryBuilder";
 import { motion } from "framer-motion";
 import { CheckCircle, Eye, Share2 } from "lucide-react";
-import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 const StoryBuilderPage = () => {
   const { id } = useParams();
-  const [storyId, setStoryId] = useState(null);
-  const [storyData, setStoryData] = useState(null);
-  const [currentStory, setCurrentStory] = useState(null);
-  const [storyTree, setStoryTree] = useState([]);
-  const [isGenerating, setIsGenerating] = useState(false);
-  const [generationStep, setGenerationStep] = useState("");
-  const [currentStorySegment, setCurrentStorySegment] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [isCompleting, setIsCompleting] = useState(false);
-  const { user, loading: authLoading } = useContext(AuthContext);
   const navigate = useNavigate();
+  const {
+    storyData,
+    currentStory,
+    storyTree,
+    isGenerating,
+    generationStep,
+    currentStorySegment,
+    isLoading,
+    error,
+    isCompleting,
+    handleStartStory,
+    handleMakeChoice,
+    handleCompleteStory,
+    handleNavigateToNode,
+    setError,
+    storyId,
+  } = useStoryBuilder(id);
 
-  useEffect(() => {
-    const loadInitialStory = async () => {
-      if (authLoading) return;
-      if (!user) {
-        navigate("/login");
-        return;
-      }
-
-      setIsLoading(true);
-      try {
-        // Only load a story if there's an ID in the URL
-        if (id) {
-          const res = await getStoryForEdit(id);
-          const storyToLoad = res.data.data;
-
-          setStoryId(storyToLoad._id);
-          setStoryData(storyToLoad);
-
-          const storyNodes = storyToLoad.segments.map((segment) => ({
-            id: segment.id,
-            text: segment.content,
-            image: segment.imageUrl,
-            choices: segment.choices,
-            parentId: segment.parentChoiceId,
-            depth: segment.depth,
-          }));
-          setStoryTree(storyNodes);
-
-          const current =
-            storyNodes.find((n) => n.id === storyToLoad.currentSegmentId) ||
-            storyNodes[storyNodes.length - 1];
-          setCurrentStory(current);
-        }
-        // If no ID, just show empty form - don't auto-load any story
-      } catch (err) {
-        console.error("Failed to load story:", err);
-        setError(
-          "Failed to load story. It may not exist or you might not have permission to edit it."
-        );
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    loadInitialStory();
-  }, [id, user, navigate, authLoading]);
-
-  const handleCompleteStory = async (makePublic = false) => {
-    if (!storyId) return;
-
-    setIsCompleting(true);
-    try {
-      const res = await completeStory(storyId, makePublic);
-      setStoryData((prev) => ({
-        ...prev,
-        status: "completed",
-        isPublic: makePublic,
-      }));
-
-      // Show success message
-      alert(res.data.message);
-
-      if (makePublic) {
-        // Redirect to the public view
-        navigate(`/story/${storyId}`);
-      }
-    } catch (err) {
-      console.error("Failed to complete story:", err);
-      setError(err.response?.data?.error || "Failed to complete story");
-    } finally {
-      setIsCompleting(false);
-    }
-  };
-
-  const handleStartStory = async (prompt, genre, tone) => {
-    if (!user) {
-      setError("Please log in to create a story.");
-      navigate("/login");
-      return;
-    }
-
-    setIsGenerating(true);
-    setError(null);
-    setCurrentStorySegment(null);
-
-    try {
-      // Step 1: Create story in database
-      setGenerationStep("Creating your story...");
-      const storyData = {
-        title: `${prompt.substring(0, 20)}...`,
-        description: `A story about ${prompt.substring(0, 50)}...`,
-        initialPrompt: prompt,
-        genre,
-        tone,
-        isPublic: false,
-      };
-      const newStoryRes = await createStory(storyData);
-      const newStoryId = newStoryRes.data.data._id;
-      setStoryId(newStoryId);
-
-      // Step 2: Generate story content
-      setGenerationStep("Writing your story...");
-      const storyRes = await generateStory(prompt, genre, tone);
-      const content = storyRes.data.data.content;
-
-      // Show story immediately
-      const partialStoryNode = {
-        id: "temp-" + Date.now(),
-        text: content,
-        image: null,
-        choices: [],
-        parentId: null,
-        depth: 0,
-      };
-      setCurrentStorySegment(partialStoryNode);
-      setCurrentStory(partialStoryNode);
-
-      // Step 3: Generate image
-      setGenerationStep("Creating artwork...");
-      const imageRes = await generateImage(content);
-      const imageUrl = imageRes.data.data.imageUrl;
-
-      // Update with image
-      const storyWithImage = { ...partialStoryNode, image: imageUrl };
-      setCurrentStorySegment(storyWithImage);
-      setCurrentStory(storyWithImage);
-
-      // Step 4: Generate choices
-      setGenerationStep("Preparing your choices...");
-      const choicesRes = await generateChoices(content);
-      const choices = choicesRes.data.data.choices;
-
-      const segmentData = {
-        content,
-        choices: choices.map((choice) => choice.text),
-        imageUrl,
-        imagePrompt: content.substring(0, 150),
-        depth: 0,
-      };
-
-      // Step 5: Save complete segment
-      setGenerationStep("Finalizing...");
-      const addedSegmentRes = await addStorySegment(newStoryId, segmentData);
-      const newSegment = addedSegmentRes.data.data.segment;
-
-      const finalStoryNode = {
-        id: newSegment.id,
-        text: newSegment.content,
-        image: newSegment.imageUrl,
-        choices: newSegment.choices,
-        parentId: null,
-        depth: 0,
-      };
-
-      setCurrentStory(finalStoryNode);
-      setStoryTree([finalStoryNode]);
-      setCurrentStorySegment(null);
-
-      // Redirect to the specific story route
-      navigate(`/create/${newStoryId}`, { replace: true });
-    } catch (err) {
-      console.error("Error generating story:", err);
-      setError(
-        err.response?.data?.error ||
-          "Failed to start story. The AI service might be down or you may need to log in."
-      );
-    } finally {
-      setIsGenerating(false);
-      setGenerationStep("");
-    }
-  };
-
-  const handleMakeChoice = async (choice, choiceIndex) => {
-    if (!currentStory || !storyId) return;
-
-    setIsGenerating(true);
-    setError(null);
-    setCurrentStorySegment(null);
-
-    try {
-      const choiceText = typeof choice === "string" ? choice : choice.text;
-      const context = `Previous story: ${currentStory.text}\nChosen path: ${choiceText}`;
-
-      // Mark the choice as selected immediately
-      setStoryTree((prev) =>
-        prev.map((node) =>
-          node.id === currentStory.id
-            ? { ...node, selectedChoiceIndex: choiceIndex }
-            : node
-        )
-      );
-
-      // Step 1: Generate story continuation
-      setGenerationStep("Continuing your story...");
-      const storyRes = await continueStory(context, choiceText);
-      const content = storyRes.data.data.content;
-
-      // Show story immediately
-      const partialStoryNode = {
-        id: "temp-" + Date.now(),
-        text: content,
-        image: null,
-        choices: [],
-        parentId: currentStory.id,
-        depth: currentStory.depth + 1,
-        choiceIndex: choiceIndex,
-      };
-      setCurrentStorySegment(partialStoryNode);
-      setCurrentStory(partialStoryNode);
-      setStoryTree((prev) => [...prev, partialStoryNode]);
-
-      // Step 2: Generate image
-      setGenerationStep("Creating artwork...");
-      const imageRes = await generateImage(content);
-      const imageUrl = imageRes.data.data.imageUrl;
-
-      // Update with image
-      const storyWithImage = { ...partialStoryNode, image: imageUrl };
-      setCurrentStorySegment(storyWithImage);
-      setCurrentStory(storyWithImage);
-      setStoryTree((prev) =>
-        prev.map((node) =>
-          node.id === partialStoryNode.id ? storyWithImage : node
-        )
-      );
-
-      // Step 3: Generate choices
-      setGenerationStep("Preparing your choices...");
-      const choicesRes = await generateChoices(content);
-      const newChoices = choicesRes.data.data.choices;
-
-      const segmentData = {
-        content,
-        choices: newChoices.map((choice) => choice.text),
-        imageUrl,
-        imagePrompt: content.substring(0, 150),
-        parentChoiceId: choice.id,
-        depth: currentStory.depth + 1,
-      };
-
-      // Step 4: Save complete segment
-      setGenerationStep("Finalizing...");
-      const addedSegmentRes = await addStorySegment(storyId, segmentData);
-      const newSegment = addedSegmentRes.data.data.segment;
-
-      const finalStoryNode = {
-        id: newSegment.id,
-        text: newSegment.content,
-        image: newSegment.imageUrl,
-        choices: newSegment.choices,
-        parentId: currentStory.id,
-        depth: currentStory.depth + 1,
-        choiceIndex: choiceIndex,
-      };
-
-      // Replace temp node with final node
-      setStoryTree((prev) =>
-        prev.map((node) =>
-          node.id === partialStoryNode.id ? finalStoryNode : node
-        )
-      );
-      setCurrentStory(finalStoryNode);
-      setCurrentStorySegment(null);
-    } catch (err) {
-      console.error("Error continuing story:", err);
-      setError(
-        err.response?.data?.error ||
-          "Failed to continue story. The AI service might be down or you may need to log in."
-      );
-    } finally {
-      setIsGenerating(false);
-      setGenerationStep("");
-    }
-  };
-
-  const handleNavigateToNode = (nodeId) => {
-    const node = storyTree.find((n) => n.id === nodeId);
-    if (node) {
-      setCurrentStory(node);
-    }
-  };
-
-  if (isLoading || authLoading) {
+  if (isLoading) {
     return (
       <div className="flex justify-center items-center min-h-[60vh]">
         <div className="w-16 h-16 border-4 border-primary-500 border-dashed rounded-full animate-spin"></div>

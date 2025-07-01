@@ -1,37 +1,11 @@
-import { getStory } from "@/utils/api";
+import { useStory } from "@/hooks/useStory";
 import { motion } from "framer-motion";
 import { Book, Calendar, User } from "lucide-react";
-import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 const StoryViewPage = () => {
   const { id } = useParams();
-  const [story, setStory] = useState(null);
-  const [storyPath, setStoryPath] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const fetchStory = async () => {
-      try {
-        setLoading(true);
-        const res = await getStory(id);
-        setStory(res.data.data);
-        setStoryPath(res.data.data.path || []);
-      } catch (err) {
-        setError(
-          "Failed to load the story. It may be private or does not exist."
-        );
-        console.error(err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    if (id) {
-      fetchStory();
-    }
-  }, [id]);
+  const { story, storyPath, loading, error } = useStory(id);
 
   if (loading) {
     return (

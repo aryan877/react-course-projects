@@ -1,52 +1,27 @@
-import express from "express";
-import { body, validationResult } from "express-validator";
-import { auth } from "../middleware/auth.js";
-import { asyncHandler } from "../middleware/errorHandler.js";
+import { auth } from "@/middleware/auth.js";
+import { asyncHandler } from "@/middleware/errorHandler.js";
 import {
   continueStory,
   generateChoices,
   generateStoryImage,
   generateStoryOpening,
   isOpenAIConfigured,
-} from "../utils/openai.js";
+} from "@/utils/openai.js";
+import {
+  continueStoryValidator,
+  generateChoicesValidator,
+  generateImageValidator,
+  generateStoryValidator,
+} from "@/validators/aiValidators.js";
+import express from "express";
+import { validationResult } from "express-validator";
 
 const router = express.Router();
 
 // Generate initial story from prompt
 router.post(
   "/generate-story",
-  [
-    auth,
-    body("prompt").trim(),
-    body("genre")
-      .optional()
-      .isIn([
-        "fantasy",
-        "sci-fi",
-        "mystery",
-        "romance",
-        "horror",
-        "adventure",
-        "drama",
-        "comedy",
-        "other",
-      ])
-      .withMessage("Invalid genre"),
-    body("tone")
-      .optional()
-      .isIn([
-        "adventurous",
-        "dark",
-        "dramatic",
-        "humorous",
-        "light",
-        "mysterious",
-        "romantic",
-        "serious",
-        "whimsical",
-      ])
-      .withMessage("Invalid tone"),
-  ],
+  [auth, ...generateStoryValidator],
   asyncHandler(async (req, res) => {
     // Check for validation errors
     const errors = validationResult(req);
@@ -92,7 +67,7 @@ router.post(
 // Continue story based on choice
 router.post(
   "/continue-story",
-  [auth, body("context").trim(), body("choice").trim()],
+  [auth, ...continueStoryValidator],
   asyncHandler(async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -135,7 +110,7 @@ router.post(
 // Generate choices for current story segment
 router.post(
   "/generate-choices",
-  [auth, body("content").trim()],
+  [auth, ...generateChoicesValidator],
   asyncHandler(async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -178,7 +153,7 @@ router.post(
 // Generate image for story segment
 router.post(
   "/generate-image",
-  [auth, body("content").trim()],
+  [auth, ...generateImageValidator],
   asyncHandler(async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {

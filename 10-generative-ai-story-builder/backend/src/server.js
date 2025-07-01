@@ -9,12 +9,12 @@ import morgan from "morgan";
 dotenv.config();
 
 // Import routes
-import aiRoutes from "./routes/ai.js";
-import authRoutes from "./routes/auth.js";
-import storyRoutes from "./routes/stories.js";
+import aiRoutes from "@/routes/ai.js";
+import authRoutes from "@/routes/auth.js";
+import storyRoutes from "@/routes/stories.js";
 
 // Import middleware
-import { errorHandler, notFound } from "./middleware/errorHandler.js";
+import { errorHandler, notFound } from "@/middleware/errorHandler.js";
 
 // Load environment variables
 const app = express();

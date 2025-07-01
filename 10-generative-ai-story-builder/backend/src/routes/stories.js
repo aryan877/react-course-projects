@@ -1,8 +1,16 @@
+import { STORY_GENRES } from "@/lib/constants.js";
+import { auth, authOptional } from "@/middleware/auth.js";
+import { asyncHandler } from "@/middleware/errorHandler.js";
+import Story from "@/models/Story.js";
+import {
+  addSegmentValidator,
+  completeStoryValidator,
+  createStoryValidator,
+  getStoryValidator,
+  updateStoryValidator,
+} from "@/validators/storyValidators.js";
 import express from "express";
-import { body, param, validationResult } from "express-validator";
-import { auth, authOptional } from "../middleware/auth.js";
-import { asyncHandler } from "../middleware/errorHandler.js";
-import Story from "../models/Story.js";
+import { validationResult } from "express-validator";
 
 const router = express.Router();
 
@@ -29,20 +37,7 @@ router.get(
       filter.status = status;
     }
 
-    if (
-      genre &&
-      [
-        "fantasy",
-        "sci-fi",
-        "mystery",
-        "romance",
-        "horror",
-        "adventure",
-        "drama",
-        "comedy",
-        "other",
-      ].includes(genre)
-    ) {
+    if (genre && STORY_GENRES.includes(genre)) {
       filter.genre = genre;
     }
 
@@ -77,51 +72,7 @@ router.get(
 // Create new story
 router.post(
   "/",
-  [
-    auth,
-    body("title")
-      .trim()
-      .isLength({ min: 1, max: 100 })
-      .withMessage("Title must be between 1 and 100 characters"),
-    body("description")
-      .optional()
-      .trim()
-      .isLength({ max: 500 })
-      .withMessage("Description cannot exceed 500 characters"),
-    body("initialPrompt")
-      .trim()
-      .isLength({ min: 10, max: 1000 })
-      .withMessage("Initial prompt must be between 10 and 1000 characters"),
-    body("genre")
-      .optional()
-      .isIn([
-        "fantasy",
-        "sci-fi",
-        "mystery",
-        "romance",
-        "horror",
-        "adventure",
-        "drama",
-        "comedy",
-        "other",
-      ])
-      .withMessage("Invalid genre"),
-    body("tone")
-      .optional()
-      .isIn([
-        "adventurous",
-        "dark",
-        "dramatic",
-        "humorous",
-        "light",
-        "mysterious",
-        "romantic",
-        "serious",
-        "whimsical",
-      ])
-      .withMessage("Invalid tone"),
-    body("tags").optional().isArray().withMessage("Tags must be an array"),
-  ],
+  [auth, ...createStoryValidator],
   asyncHandler(async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -167,7 +118,7 @@ router.post(
 // Get specific story by ID (for public viewing)
 router.get(
   "/:id",
-  [authOptional, param("id").isMongoId().withMessage("Invalid story ID")],
+  [authOptional, ...getStoryValidator],
   asyncHandler(async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -220,7 +171,7 @@ router.get(
 // Get specific story for editing (separate endpoint)
 router.get(
   "/:id/edit",
-  [auth, param("id").isMongoId().withMessage("Invalid story ID")],
+  [auth, ...getStoryValidator],
   asyncHandler(async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -268,14 +219,7 @@ router.get(
 // Complete and optionally publish story
 router.post(
   "/:id/complete",
-  [
-    auth,
-    param("id").isMongoId().withMessage("Invalid story ID"),
-    body("makePublic")
-      .optional()
-      .isBoolean()
-      .withMessage("makePublic must be boolean"),
-  ],
+  [auth, ...completeStoryValidator],
   asyncHandler(async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -325,53 +269,7 @@ router.post(
 // Update story
 router.put(
   "/:id",
-  [
-    auth,
-    param("id").isMongoId().withMessage("Invalid story ID"),
-    body("title")
-      .optional()
-      .trim()
-      .isLength({ min: 1, max: 100 })
-      .withMessage("Title must be between 1 and 100 characters"),
-    body("description")
-      .optional()
-      .trim()
-      .isLength({ max: 500 })
-      .withMessage("Description cannot exceed 500 characters"),
-    body("genre")
-      .optional()
-      .isIn([
-        "fantasy",
-        "sci-fi",
-        "mystery",
-        "romance",
-        "horror",
-        "adventure",
-        "drama",
-        "comedy",
-        "other",
-      ])
-      .withMessage("Invalid genre"),
-    body("tone")
-      .optional()
-      .isIn([
-        "adventurous",
-        "dark",
-        "dramatic",
-        "humorous",
-        "light",
-        "mysterious",
-        "romantic",
-        "serious",
-        "whimsical",
-      ])
-      .withMessage("Invalid tone"),
-    body("status")
-      .optional()
-      .isIn(["draft", "in-progress", "completed", "abandoned"])
-      .withMessage("Invalid status"),
-    body("tags").optional().isArray().withMessage("Tags must be an array"),
-  ],
+  [auth, ...updateStoryValidator],
   asyncHandler(async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -434,27 +332,7 @@ router.put(
 // Add story segment
 router.post(
   "/:id/segments",
-  [
-    auth,
-    param("id").isMongoId().withMessage("Invalid story ID"),
-    body("content")
-      .trim()
-      .isLength({ min: 50, max: 2000 })
-      .withMessage("Content must be between 50 and 2000 characters"),
-    body("choices")
-      .optional()
-      .isArray()
-      .withMessage("Choices must be an array"),
-    body("parentChoiceId")
-      .optional()
-      .isString()
-      .withMessage("Parent choice ID must be a string"),
-    body("imageUrl").optional().isURL().withMessage("Image URL must be valid"),
-    body("imagePrompt")
-      .optional()
-      .isString()
-      .withMessage("Image prompt must be a string"),
-  ],
+  [auth, ...addSegmentValidator],
   asyncHandler(async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {

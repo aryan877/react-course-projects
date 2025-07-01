@@ -1,41 +1,12 @@
-import AuthContext from "@/contexts/AuthContext";
-import { getMyStories } from "@/utils/api";
+import { useStories } from "@/hooks/useStories";
 import { motion } from "framer-motion";
 import { BookOpen, Eye, PlusSquare, Share2 } from "lucide-react";
-import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const GalleryPage = () => {
-  const [stories, setStories] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const { user, loading: authLoading } = useContext(AuthContext);
+  const { stories, loading, error, user } = useStories();
 
-  useEffect(() => {
-    const fetchStories = async () => {
-      if (authLoading) return;
-      if (!user) {
-        setLoading(false);
-        return;
-      }
-
-      try {
-        setLoading(true);
-        const response = await getMyStories();
-        setStories(response.data.data.stories);
-        setError(null);
-      } catch (err) {
-        setError("Failed to fetch your stories. Please try again later.");
-        console.error(err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchStories();
-  }, [user, authLoading]);
-
-  if (loading || authLoading) {
+  if (loading) {
     return (
       <div className="flex justify-center items-center min-h-[60vh]">
         <div className="w-16 h-16 border-4 border-primary-500 border-dashed rounded-full animate-spin"></div>
