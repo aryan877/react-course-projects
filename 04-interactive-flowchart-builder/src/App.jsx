@@ -1,9 +1,9 @@
+import Canvas from "@/components/Canvas";
+import TextEditor from "@/components/TextEditor";
+import Toolbar from "@/components/Toolbar";
+import { useFlowchart } from "@/hooks/useFlowchart";
 import { AnimatePresence } from "framer-motion";
 import { useCallback, useEffect, useState } from "react";
-import Canvas from "./components/Canvas";
-import TextEditor from "./components/TextEditor";
-import Toolbar from "./components/Toolbar";
-import { useFlowchart } from "./hooks/useFlowchart";
 
 function App() {
   const [selectedTool, setSelectedTool] = useState(null);

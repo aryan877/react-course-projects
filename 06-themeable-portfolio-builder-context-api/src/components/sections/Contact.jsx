@@ -1,3 +1,7 @@
+import Button from "@/components/ui/Button";
+import Card from "@/components/ui/Card";
+import Section from "@/components/ui/Section";
+import { useTheme } from "@/hooks/useTheme";
 import {
   Github,
   Linkedin,
@@ -8,10 +12,6 @@ import {
   Twitter,
 } from "lucide-react";
 import { useState } from "react";
-import { useTheme } from "../../hooks/useTheme";
-import Button from "../ui/Button";
-import Card from "../ui/Card";
-import Section from "../ui/Section";
 
 const Contact = () => {
   const { isDarkMode, typography } = useTheme();

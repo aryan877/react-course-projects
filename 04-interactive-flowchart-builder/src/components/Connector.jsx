@@ -1,5 +1,5 @@
+import { getConnectionPoints } from "@/utils/geometry";
 import { motion } from "framer-motion";
-import { getConnectionPoints } from "../utils/geometry";
 
 const Connector = ({ connection, fromNode, toNode, onDelete, isSelected }) => {
   if (!fromNode || !toNode) return null;

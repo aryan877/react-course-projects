@@ -1,3 +1,7 @@
+import LoadingSkeleton from "@/components/common/LoadingSkeleton";
+import Widget from "@/components/common/Widget";
+import { fetchWeatherData } from "@/utils/api";
+import { DEFAULT_SETTINGS } from "@/utils/constants";
 import {
   useActionState,
   useEffect,
@@ -5,10 +9,6 @@ import {
   useState,
   useTransition,
 } from "react";
-import { fetchWeatherData } from "../../utils/api";
-import { DEFAULT_SETTINGS } from "../../utils/constants";
-import LoadingSkeleton from "../common/LoadingSkeleton";
-import Widget from "../common/Widget";
 
 const WeatherWidget = () => {
   const [weatherData, setWeatherData] = useState(null);

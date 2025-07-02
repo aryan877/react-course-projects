@@ -1,13 +1,13 @@
+import Navigation from "@/components/Navigation";
+import ThemeSettings from "@/components/ThemeSettings";
+import About from "@/components/sections/About";
+import Contact from "@/components/sections/Contact";
+import Hero from "@/components/sections/Hero";
+import Projects from "@/components/sections/Projects";
+import Skills from "@/components/sections/Skills";
+import { ThemeProvider } from "@/context/ThemeContext";
+import { useTheme } from "@/hooks/useTheme";
 import { useState } from "react";
-import Navigation from "./components/Navigation";
-import ThemeSettings from "./components/ThemeSettings";
-import About from "./components/sections/About";
-import Contact from "./components/sections/Contact";
-import Hero from "./components/sections/Hero";
-import Projects from "./components/sections/Projects";
-import Skills from "./components/sections/Skills";
-import { ThemeProvider } from "./context/ThemeContext";
-import { useTheme } from "./hooks/useTheme";
 
 // Main App Content Component
 const AppContent = () => {

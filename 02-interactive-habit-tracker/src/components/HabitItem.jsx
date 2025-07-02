@@ -1,5 +1,5 @@
+import { calculateStreak, getTodayString } from "@/utils/dateUtils.js";
 import { Check, Flame, Trash2 } from "lucide-react";
-import { calculateStreak, getTodayString } from "../utils/dateUtils.js";
 
 const HabitItem = ({ habit, currentWeek, onToggleDay, onDelete }) => {
   const today = getTodayString();

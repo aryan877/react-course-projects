@@ -1,8 +1,8 @@
+import LoadingSkeleton from "@/components/common/LoadingSkeleton";
+import Widget from "@/components/common/Widget";
+import { fetchCryptoData } from "@/utils/api";
+import { DEFAULT_SETTINGS } from "@/utils/constants";
 import { useActionState, useEffect, useState, useTransition } from "react";
-import { fetchCryptoData } from "../../utils/api";
-import { DEFAULT_SETTINGS } from "../../utils/constants";
-import LoadingSkeleton from "../common/LoadingSkeleton";
-import Widget from "../common/Widget";
 
 const CryptoWidget = () => {
   const [cryptoData, setCryptoData] = useState([]);

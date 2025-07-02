@@ -1,7 +1,7 @@
+import { NODE_CONFIGS } from "@/constants/nodeTypes";
+import { useDebounce } from "@/hooks/useDebounce";
+import { generateId } from "@/utils/geometry";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { NODE_CONFIGS } from "../constants/nodeTypes";
-import { generateId } from "../utils/geometry";
-import { useDebounce } from "./useDebounce";
 
 export const useFlowchart = () => {
   const [nodes, setNodes] = useState([]);

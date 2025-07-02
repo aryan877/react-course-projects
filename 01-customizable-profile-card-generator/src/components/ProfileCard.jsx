@@ -1,5 +1,5 @@
-import defaultAvatar from "../assets/default-avatar.svg";
-import "./ProfileCard.css";
+import defaultAvatar from "@/assets/default-avatar.svg";
+import "@/components/ProfileCard.css";
 
 /**
  * ProfileCard component displays user profile information

@@ -1,6 +1,6 @@
+import { NODE_TYPES } from "@/constants/nodeTypes";
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { NODE_TYPES } from "../constants/nodeTypes";
 
 const Node = ({
   node,

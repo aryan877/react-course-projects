@@ -1,7 +1,7 @@
+import CryptoWidget from "@/components/widgets/CryptoWidget";
+import FactWidget from "@/components/widgets/FactWidget";
+import WeatherWidget from "@/components/widgets/WeatherWidget";
 import { useEffect, useState } from "react";
-import CryptoWidget from "./widgets/CryptoWidget";
-import FactWidget from "./widgets/FactWidget";
-import WeatherWidget from "./widgets/WeatherWidget";
 
 const Dashboard = () => {
   const [lastUpdated, setLastUpdated] = useState(new Date());

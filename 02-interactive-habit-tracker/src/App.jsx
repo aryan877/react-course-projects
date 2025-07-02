@@ -1,8 +1,8 @@
+import AddHabitForm from "@/components/AddHabitForm.jsx";
+import HabitItem from "@/components/HabitItem.jsx";
+import { getCurrentWeekDates, getTodayString } from "@/utils/dateUtils.js";
 import { Plus } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
-import AddHabitForm from "./components/AddHabitForm.jsx";
-import HabitItem from "./components/HabitItem.jsx";
-import { getCurrentWeekDates, getTodayString } from "./utils/dateUtils.js";
 
 function App() {
   const [habits, setHabits] = useState([]);
@@ -103,7 +103,7 @@ function App() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-gray-500 text-sm font-medium">
-                  Today's Progress
+                  Today&apos;s Progress
                 </p>
                 <p className="text-3xl font-bold text-blue-600">
                   {getTotalCompletedToday()}

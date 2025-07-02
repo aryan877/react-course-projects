@@ -1,4 +1,8 @@
-import { API_ENDPOINTS, API_KEYS, DEFAULT_SETTINGS } from "./constants.js";
+import {
+  API_ENDPOINTS,
+  API_KEYS,
+  DEFAULT_SETTINGS,
+} from "@/utils/constants.js";
 
 export class ApiError extends Error {
   constructor(message, status) {

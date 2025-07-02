@@ -1,6 +1,6 @@
+import { getCourseById } from "@/data/coursesData";
 import { ArrowRight } from "lucide-react";
 import { Link, useParams } from "react-router";
-import { getCourseById } from "../data/coursesData";
 
 /**
  * CourseDetails Component

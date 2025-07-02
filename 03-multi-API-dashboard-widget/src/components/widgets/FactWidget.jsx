@@ -1,7 +1,7 @@
+import LoadingSkeleton from "@/components/common/LoadingSkeleton";
+import Widget from "@/components/common/Widget";
+import { fetchFactData } from "@/utils/api";
 import { useActionState, useEffect, useState, useTransition } from "react";
-import { fetchFactData } from "../../utils/api";
-import LoadingSkeleton from "../common/LoadingSkeleton";
-import Widget from "../common/Widget";
 
 const FactWidget = () => {
   const [factData, setFactData] = useState(null);

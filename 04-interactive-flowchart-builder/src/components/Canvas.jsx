@@ -1,7 +1,7 @@
+import Connector from "@/components/Connector";
+import Node from "@/components/Node";
 import { AnimatePresence, motion } from "framer-motion";
 import { useRef } from "react";
-import Connector from "./Connector";
-import Node from "./Node";
 
 const Canvas = ({
   nodes,

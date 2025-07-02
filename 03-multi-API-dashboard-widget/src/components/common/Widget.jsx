@@ -1,5 +1,5 @@
+import ErrorBoundary from "@/components/common/ErrorBoundary";
 import { useState } from "react";
-import ErrorBoundary from "./ErrorBoundary";
 
 const Widget = ({
   title,

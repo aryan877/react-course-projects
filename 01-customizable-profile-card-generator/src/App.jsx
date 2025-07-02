@@ -1,7 +1,7 @@
+import "@/App.css";
+import ProfileCard from "@/components/ProfileCard";
+import ProfileForm from "@/components/ProfileForm";
 import { useState } from "react";
-import "./App.css";
-import ProfileCard from "./components/ProfileCard";
-import ProfileForm from "./components/ProfileForm";
 
 /**
  * Main App component that manages profile state and provides server actions

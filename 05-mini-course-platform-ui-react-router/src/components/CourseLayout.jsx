@@ -1,7 +1,7 @@
+import NotFound from "@/components/NotFound";
+import { getCourseById } from "@/data/coursesData";
 import { ArrowLeft, BookOpen } from "lucide-react";
 import { Link, Outlet, useLocation, useParams } from "react-router";
-import { getCourseById } from "../data/coursesData";
-import NotFound from "./NotFound";
 
 /**
  * CourseLayout Component

@@ -1,7 +1,7 @@
+import NotFound from "@/components/NotFound";
+import { getCourseById, getLessonById } from "@/data/coursesData";
 import { ArrowLeft, ArrowRight, CheckCircle, Clock } from "lucide-react";
 import { Link, useParams } from "react-router";
-import { getCourseById, getLessonById } from "../data/coursesData";
-import NotFound from "./NotFound";
 
 /**
  * LessonContent Component

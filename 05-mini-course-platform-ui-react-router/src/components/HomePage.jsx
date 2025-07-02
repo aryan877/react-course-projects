@@ -1,6 +1,6 @@
+import { coursesData } from "@/data/coursesData";
 import { ArrowRight, CheckCircle, Clock } from "lucide-react";
 import { Link } from "react-router";
-import { coursesData } from "../data/coursesData";
 
 /**
  * HomePage Component

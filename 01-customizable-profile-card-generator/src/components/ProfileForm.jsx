@@ -1,5 +1,5 @@
+import "@/components/ProfileForm.css";
 import { useActionState, useState } from "react";
-import "./ProfileForm.css";
 
 /**
  * ProfileForm component for editing user profile information

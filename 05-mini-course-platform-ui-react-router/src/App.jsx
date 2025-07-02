@@ -1,9 +1,9 @@
+import CourseDetails from "@/components/CourseDetails";
+import CourseLayout from "@/components/CourseLayout";
+import HomePage from "@/components/HomePage";
+import LessonContent from "@/components/LessonContent";
+import NotFound from "@/components/NotFound";
 import { Route, BrowserRouter as Router, Routes } from "react-router";
-import CourseDetails from "./components/CourseDetails";
-import CourseLayout from "./components/CourseLayout";
-import HomePage from "./components/HomePage";
-import LessonContent from "./components/LessonContent";
-import NotFound from "./components/NotFound";
 
 /**
  * Main App component that sets up the routing structure

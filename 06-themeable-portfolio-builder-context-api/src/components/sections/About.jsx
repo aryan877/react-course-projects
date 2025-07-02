@@ -1,8 +1,8 @@
+import Button from "@/components/ui/Button";
+import Card from "@/components/ui/Card";
+import Section from "@/components/ui/Section";
+import { useTheme } from "@/hooks/useTheme";
 import { Download, User } from "lucide-react";
-import { useTheme } from "../../hooks/useTheme";
-import Button from "../ui/Button";
-import Card from "../ui/Card";
-import Section from "../ui/Section";
 
 const About = () => {
   const { isDarkMode, typography } = useTheme();

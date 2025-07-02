@@ -1,3 +1,4 @@
+import { NODE_TYPES } from "@/constants/nodeTypes";
 import { motion } from "framer-motion";
 import {
   Circle,
@@ -12,7 +13,6 @@ import {
   Trash2,
   Undo,
 } from "lucide-react";
-import { NODE_TYPES } from "../constants/nodeTypes";
 
 const Toolbar = ({
   selectedTool,

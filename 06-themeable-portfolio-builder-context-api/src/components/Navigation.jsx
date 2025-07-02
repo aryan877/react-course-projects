@@ -1,7 +1,7 @@
+import Button from "@/components/ui/Button";
+import { useTheme } from "@/hooks/useTheme";
 import { Menu, Settings, X } from "lucide-react";
 import { useState } from "react";
-import { useTheme } from "../hooks/useTheme";
-import Button from "./ui/Button";
 
 const Navigation = ({ onToggleSettings }) => {
   const [isOpen, setIsOpen] = useState(false);

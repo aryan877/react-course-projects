@@ -1,4 +1,4 @@
-import { useTheme } from "../../hooks/useTheme";
+import { useTheme } from "@/hooks/useTheme";
 
 const Section = ({ children, className = "", id = "", title = "" }) => {
   const { isDarkMode, typography } = useTheme();

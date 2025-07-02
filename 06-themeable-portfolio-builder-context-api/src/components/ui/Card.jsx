@@ -1,4 +1,4 @@
-import { useTheme } from "../../hooks/useTheme";
+import { useTheme } from "@/hooks/useTheme";
 
 const Card = ({ children, className = "", hover = true, ...props }) => {
   const { isDarkMode, spacing } = useTheme();

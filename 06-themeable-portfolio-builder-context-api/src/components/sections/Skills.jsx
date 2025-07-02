@@ -1,7 +1,7 @@
+import Card from "@/components/ui/Card";
+import Section from "@/components/ui/Section";
+import { useTheme } from "@/hooks/useTheme";
 import { Code, Database, Globe, Palette, Smartphone, Zap } from "lucide-react";
-import { useTheme } from "../../hooks/useTheme";
-import Card from "../ui/Card";
-import Section from "../ui/Section";
 
 const Skills = () => {
   const { isDarkMode, typography } = useTheme();

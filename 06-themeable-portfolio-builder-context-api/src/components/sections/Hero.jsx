@@ -1,6 +1,6 @@
+import Button from "@/components/ui/Button";
+import { useTheme } from "@/hooks/useTheme";
 import { ChevronDown, Sparkles } from "lucide-react";
-import { useTheme } from "../../hooks/useTheme";
-import Button from "../ui/Button";
 
 const Hero = () => {
   const { isDarkMode, typography } = useTheme();

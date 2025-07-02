@@ -1,6 +1,6 @@
+import Button from "@/components/ui/Button";
+import { useTheme } from "@/hooks/useTheme";
 import { Layout, Moon, Palette, Sun, Type, X } from "lucide-react";
-import { useTheme } from "../hooks/useTheme";
-import Button from "./ui/Button";
 
 const ThemeSettings = ({ isOpen, onClose }) => {
   const {
