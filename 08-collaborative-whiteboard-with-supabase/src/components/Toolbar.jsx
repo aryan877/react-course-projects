@@ -1,3 +1,4 @@
+import { STROKE_WIDTHS, TOOL_COLORS } from "@/utils/constants";
 import {
   Circle,
   Eraser,
@@ -12,7 +13,6 @@ import {
   Undo2,
 } from "lucide-react";
 import { useState } from "react";
-import { STROKE_WIDTHS, TOOL_COLORS } from "../utils/constants";
 
 const tools = [
   { id: "pen", icon: Pen, label: "Pen" },

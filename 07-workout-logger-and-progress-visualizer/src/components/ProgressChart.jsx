@@ -1,3 +1,5 @@
+import useWorkoutStore from "@/store/workoutStore";
+import { getDisplayVolume, getDisplayWeight } from "@/utils/weightUtils";
 import {
   CategoryScale,
   Chart as ChartJS,
@@ -14,8 +16,6 @@ import { Activity, BarChart3, Download, TrendingUp } from "lucide-react";
 import Papa from "papaparse";
 import { useEffect, useMemo, useState } from "react";
 import { Line } from "react-chartjs-2";
-import useWorkoutStore from "../store/workoutStore";
-import { getDisplayVolume, getDisplayWeight } from "../utils/weightUtils";
 
 ChartJS.register(
   CategoryScale,

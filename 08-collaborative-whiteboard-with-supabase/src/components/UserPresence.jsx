@@ -1,3 +1,4 @@
+import { updateWhiteboardTitle } from "@/lib/db";
 import {
   Check,
   Crown,
@@ -9,7 +10,6 @@ import {
   X,
 } from "lucide-react";
 import { useState } from "react";
-import { updateWhiteboardTitle } from "../lib/db";
 
 /**
  * A component that displays the top bar of the whiteboard UI.

@@ -1,7 +1,7 @@
-import { AuthForm } from "./components/AuthForm";
-import { FullScreenLoader } from "./components/common/FullScreenLoader";
-import { WhiteboardApp } from "./components/WhiteboardApp";
-import { useAuth } from "./hooks/useAuth";
+import { AuthForm } from "@/components/AuthForm";
+import { FullScreenLoader } from "@/components/common/FullScreenLoader";
+import { WhiteboardApp } from "@/components/WhiteboardApp";
+import { useAuth } from "@/hooks/useAuth";
 
 /**
  * The root component of the application.

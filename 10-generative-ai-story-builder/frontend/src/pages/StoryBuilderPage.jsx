@@ -4,7 +4,7 @@ import StoryTree from "@/components/StoryTree";
 import { useStoryBuilder } from "@/hooks/useStoryBuilder";
 import { motion } from "framer-motion";
 import { CheckCircle, Eye, Share2 } from "lucide-react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router";
 
 const StoryBuilderPage = () => {
   const { id } = useParams();

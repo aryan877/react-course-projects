@@ -1,8 +1,8 @@
+import Navigation from "@/components/Navigation";
+import LogWorkout from "@/pages/LogWorkout";
+import Progress from "@/pages/Progress";
+import useWorkoutStore from "@/store/workoutStore";
 import { Route, Routes } from "react-router";
-import Navigation from "./components/Navigation";
-import LogWorkout from "./pages/LogWorkout";
-import Progress from "./pages/Progress";
-import useWorkoutStore from "./store/workoutStore";
 
 function App() {
   const { isLoading, error } = useWorkoutStore();

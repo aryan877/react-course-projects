@@ -1,3 +1,6 @@
+import EditWorkoutModal from "@/components/EditWorkoutModal";
+import useWorkoutStore from "@/store/workoutStore";
+import { getDisplayWeight } from "@/utils/weightUtils";
 import { format } from "date-fns";
 import {
   Activity,
@@ -10,9 +13,6 @@ import {
   Trash2,
 } from "lucide-react";
 import { useState } from "react";
-import useWorkoutStore from "../store/workoutStore";
-import { getDisplayWeight } from "../utils/weightUtils";
-import EditWorkoutModal from "./EditWorkoutModal";
 
 const WorkoutList = () => {
   const { workouts, deleteWorkout, weightUnit } = useWorkoutStore();

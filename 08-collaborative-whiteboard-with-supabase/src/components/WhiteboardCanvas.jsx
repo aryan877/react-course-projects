@@ -1,7 +1,7 @@
+import { useCanvasDrawing } from "@/hooks/useCanvasDrawing";
+import { useCanvasInteraction } from "@/hooks/useCanvasInteraction";
+import { deleteCursor } from "@/lib/db";
 import { memo, useCallback, useEffect, useRef, useState } from "react";
-import { useCanvasDrawing } from "../hooks/useCanvasDrawing";
-import { useCanvasInteraction } from "../hooks/useCanvasInteraction";
-import { deleteCursor } from "../lib/db";
 
 /**
  * The core canvas component where all drawing occurs.

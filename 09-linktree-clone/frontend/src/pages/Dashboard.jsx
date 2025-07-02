@@ -1,7 +1,7 @@
+import { useAuth } from "@/hooks/useAuth";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
-import { useAuth } from "../hooks/useAuth";
 
 const Dashboard = () => {
   const { user } = useAuth();

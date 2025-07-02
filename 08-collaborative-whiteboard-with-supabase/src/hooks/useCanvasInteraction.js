@@ -1,11 +1,11 @@
-import { useCallback, useRef } from "react";
 import {
   distance,
   isPointNearCircle,
   isPointNearLine,
   isPointNearPath,
   isPointNearRect,
-} from "../utils/hitDetection";
+} from "@/utils/hitDetection";
+import { useCallback, useRef } from "react";
 
 /**
  * This hook manages the user's direct interaction with the canvas element.

@@ -1,18 +1,18 @@
-import { Palette } from "lucide-react";
-import { useCallback, useEffect, useState } from "react";
-import { v4 as uuidv4 } from "uuid";
-import { useWhiteboardData } from "../hooks/useWhiteboardData";
-import { createWhiteboard, getWhiteboard } from "../lib/db";
+import { FullScreenLoader } from "@/components/common/FullScreenLoader";
+import { Toolbar } from "@/components/Toolbar";
+import { UserPresence } from "@/components/UserPresence";
+import { WhiteboardCanvas } from "@/components/WhiteboardCanvas";
+import { useWhiteboardData } from "@/hooks/useWhiteboardData";
+import { createWhiteboard, getWhiteboard } from "@/lib/db";
 import {
   getPresenceChannel,
   removeChannel,
   subscribeToPresenceChannel,
   trackInPresenceChannel,
-} from "../lib/realtime";
-import { FullScreenLoader } from "./common/FullScreenLoader";
-import { Toolbar } from "./Toolbar";
-import { UserPresence } from "./UserPresence";
-import { WhiteboardCanvas } from "./WhiteboardCanvas";
+} from "@/lib/realtime";
+import { Palette } from "lucide-react";
+import { useCallback, useEffect, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 /**
  * The main component for the collaborative whiteboard experience.

@@ -1,6 +1,6 @@
+import { convertWeight } from "@/utils/weightUtils";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { convertWeight } from "../utils/weightUtils";
 
 const useWorkoutStore = create(
   persist(

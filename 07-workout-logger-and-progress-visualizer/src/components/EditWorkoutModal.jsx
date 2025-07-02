@@ -1,3 +1,5 @@
+import AddExerciseForm from "@/components/AddExerciseForm";
+import useWorkoutStore from "@/store/workoutStore";
 import {
   AlertCircle,
   Calendar,
@@ -8,8 +10,6 @@ import {
   X,
 } from "lucide-react";
 import { useEffect, useState } from "react";
-import useWorkoutStore from "../store/workoutStore";
-import AddExerciseForm from "./AddExerciseForm";
 
 const EditWorkoutModal = ({ workout: session, onClose }) => {
   const { updateWorkout } = useWorkoutStore();

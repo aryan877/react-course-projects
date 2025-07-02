@@ -1,13 +1,13 @@
-import express from "express"
-import { auth } from "../middleware/auth.js"
-import { asyncHandler } from '../middleware/errorHandler.js'
-import User from "../models/User.js"
+import { auth } from '@/middleware/auth.js'
+import { asyncHandler } from '@/middleware/errorHandler.js'
+import User from '@/models/User.js'
+import express from 'express'
 
 const router = express.Router()
 
 // Register
 router.post(
-  "/register",
+  '/register',
   asyncHandler(async (req, res) => {
     const { username, email, password, displayName } = req.body
 
@@ -19,7 +19,7 @@ router.post(
     if (existingUser) {
       res.status(400)
       throw new Error(
-        existingUser.email === email ? "Email already exists" : "Username already taken"
+        existingUser.email === email ? 'Email already exists' : 'Username already taken'
       )
     }
 
@@ -47,7 +47,7 @@ router.post(
 
 // Login
 router.post(
-  "/login",
+  '/login',
   asyncHandler(async (req, res) => {
     const { email, password } = req.body
 
@@ -82,7 +82,7 @@ router.post(
 
 // Get current user
 router.get(
-  "/me",
+  '/me',
   auth,
   asyncHandler(async (req, res) => {
     res.json({

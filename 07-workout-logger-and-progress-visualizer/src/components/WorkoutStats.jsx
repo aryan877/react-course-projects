@@ -1,3 +1,5 @@
+import useWorkoutStore from "@/store/workoutStore";
+import { getDisplayVolume } from "@/utils/weightUtils";
 import {
   differenceInCalendarDays,
   isToday,
@@ -12,8 +14,6 @@ import {
   TrendingUp,
   Zap,
 } from "lucide-react";
-import useWorkoutStore from "../store/workoutStore";
-import { getDisplayVolume } from "../utils/weightUtils";
 
 const WorkoutStats = () => {
   const { getWorkoutStats, workouts, weightUnit } = useWorkoutStore();

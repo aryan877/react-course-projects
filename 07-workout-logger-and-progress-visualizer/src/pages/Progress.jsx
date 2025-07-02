@@ -1,7 +1,7 @@
+import ProgressChart from "@/components/ProgressChart";
+import useWorkoutStore from "@/store/workoutStore";
 import { BarChart3, Dumbbell, TrendingUp } from "lucide-react";
 import { useNavigate } from "react-router";
-import ProgressChart from "../components/ProgressChart";
-import useWorkoutStore from "../store/workoutStore";
 
 const Progress = () => {
   const { workouts } = useWorkoutStore();

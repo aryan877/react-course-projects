@@ -1,7 +1,7 @@
+import { createProfile, getProfile, updateUserProfile } from "@/lib/db";
+import { supabase } from "@/lib/supabase";
+import { AVATAR_COLORS } from "@/utils/constants";
 import { useCallback, useEffect, useState } from "react";
-import { createProfile, getProfile, updateUserProfile } from "../lib/db";
-import { supabase } from "../lib/supabase";
-import { AVATAR_COLORS } from "../utils/constants";
 
 export function useAuth() {
   const [user, setUser] = useState(null);

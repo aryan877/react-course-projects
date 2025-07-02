@@ -1,8 +1,8 @@
+import useWorkoutStore from "@/store/workoutStore";
+import { getAllCategories } from "@/utils/exercises";
+import { getWeightPlaceholder, getWeightStep } from "@/utils/weightUtils";
 import { AlertCircle, Hash, PlusCircle, Target } from "lucide-react";
 import { useState } from "react";
-import useWorkoutStore from "../store/workoutStore";
-import { getAllCategories } from "../utils/exercises";
-import { getWeightPlaceholder, getWeightStep } from "../utils/weightUtils";
 
 const AddExerciseForm = ({ onAddExercise, isSubmitting }) => {
   const { weightUnit } = useWorkoutStore();

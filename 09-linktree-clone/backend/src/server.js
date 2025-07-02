@@ -8,12 +8,12 @@ import mongoose from 'mongoose'
 import morgan from 'morgan'
 
 // Import routes
-import authRoutes from './routes/auth.js'
-import linkRoutes from './routes/links.js'
-import userRoutes from './routes/users.js'
+import authRoutes from '@/routes/auth.js'
+import linkRoutes from '@/routes/links.js'
+import userRoutes from '@/routes/users.js'
 
 // Import middleware
-import { errorHandler, notFound } from './middleware/errorHandler.js'
+import { errorHandler, notFound } from '@/middleware/errorHandler.js'
 
 // Load environment variables
 dotenv.config()

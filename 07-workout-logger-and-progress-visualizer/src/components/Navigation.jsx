@@ -1,7 +1,7 @@
+import useWorkoutStore from "@/store/workoutStore";
 import { Dumbbell, Menu, Scale, TrendingUp, X } from "lucide-react";
 import { useState } from "react";
 import { NavLink, useLocation } from "react-router";
-import useWorkoutStore from "../store/workoutStore";
 
 const Navigation = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);

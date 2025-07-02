@@ -1,7 +1,7 @@
+import WorkoutForm from "@/components/WorkoutForm";
+import WorkoutList from "@/components/WorkoutList";
+import WorkoutStats from "@/components/WorkoutStats";
 import { Dumbbell } from "lucide-react";
-import WorkoutForm from "../components/WorkoutForm";
-import WorkoutList from "../components/WorkoutList";
-import WorkoutStats from "../components/WorkoutStats";
 
 const LogWorkout = () => {
   return (

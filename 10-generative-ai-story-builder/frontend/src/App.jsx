@@ -7,12 +7,7 @@ import StoryBuilderPage from "@/pages/StoryBuilderPage";
 import StoryViewPage from "@/pages/StoryViewPage";
 import { AuthProvider } from "@/providers/AuthProvider.jsx";
 import { motion } from "framer-motion";
-import {
-  Navigate,
-  Route,
-  BrowserRouter as Router,
-  Routes,
-} from "react-router-dom";
+import { Navigate, Route, BrowserRouter as Router, Routes } from "react-router";
 
 function App() {
   return (

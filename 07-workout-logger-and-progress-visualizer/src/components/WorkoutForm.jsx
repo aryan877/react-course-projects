@@ -1,3 +1,5 @@
+import AddExerciseForm from "@/components/AddExerciseForm";
+import useWorkoutStore from "@/store/workoutStore";
 import {
   AlertCircle,
   Calendar,
@@ -7,8 +9,6 @@ import {
   Trash2,
 } from "lucide-react";
 import { useState } from "react";
-import useWorkoutStore from "../store/workoutStore";
-import AddExerciseForm from "./AddExerciseForm";
 
 const WorkoutForm = () => {
   const { addWorkout } = useWorkoutStore();

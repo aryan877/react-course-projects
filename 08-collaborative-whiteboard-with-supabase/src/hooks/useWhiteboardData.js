@@ -1,17 +1,17 @@
-import { useCallback, useEffect, useState } from "react";
-import { v4 as uuidv4 } from "uuid";
 import {
   deleteAllElementsForWhiteboard,
   deleteElementsByIds,
   getElementsForWhiteboard,
   insertElement,
-} from "../lib/db";
+} from "@/lib/db";
 import {
   broadcastStateReplace,
   getElementsChannel,
   removeChannel,
   subscribeToElementsChannel,
-} from "../lib/realtime";
+} from "@/lib/realtime";
+import { useCallback, useEffect, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 /**
  * A comprehensive hook for managing all data related to a specific whiteboard.

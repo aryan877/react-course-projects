@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowRight, BookOpen, Image, Share2, Sparkles } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 
 const HomePage = () => {
   const features = [

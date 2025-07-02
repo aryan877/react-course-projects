@@ -1,7 +1,7 @@
 import { useStories } from "@/hooks/useStories";
 import { motion } from "framer-motion";
 import { BookOpen, Eye, PlusSquare, Share2 } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 
 const GalleryPage = () => {
   const { stories, loading, error, user } = useStories();

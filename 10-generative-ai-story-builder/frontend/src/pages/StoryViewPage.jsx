@@ -1,7 +1,7 @@
 import { useStory } from "@/hooks/useStory";
 import { motion } from "framer-motion";
 import { Book, Calendar, User } from "lucide-react";
-import { useParams } from "react-router-dom";
+import { useParams } from "react-router";
 
 const StoryViewPage = () => {
   const { id } = useParams();

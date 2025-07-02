@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { UserPlus } from "lucide-react";
 import { useActionState } from "react";
 import { useFormStatus } from "react-dom";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router";
 
 function SubmitButton() {
   const { pending } = useFormStatus();
