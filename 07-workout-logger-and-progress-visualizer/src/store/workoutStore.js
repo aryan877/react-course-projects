@@ -5,7 +5,7 @@ import { persist } from "zustand/middleware";
 const useWorkoutStore = create(
   persist(
     (set, get) => ({
-      workouts: [], // This will be an array of workout sessions
+      workouts: [], // Array of workout sessions
       isLoading: false,
       error: null,
       weightUnit: "lbs", // 'lbs' or 'kg'
@@ -108,41 +108,6 @@ const useWorkoutStore = create(
     }),
     {
       name: "workout-storage",
-      version: 2, // Bump version due to data structure change
-      migrate: (persistedState, version) => {
-        if (
-          version < 2 &&
-          persistedState &&
-          Array.isArray(persistedState.workouts)
-        ) {
-          // This migration handles the old data structure where each "workout" was a single exercise.
-          // We'll convert each of these into a workout session with a single exercise.
-          const migratedWorkouts = persistedState.workouts.map((oldWorkout) => {
-            // Check if it has already been migrated
-            if (oldWorkout.exercises && Array.isArray(oldWorkout.exercises)) {
-              return oldWorkout;
-            }
-            return {
-              id: oldWorkout.id,
-              date: oldWorkout.date,
-              createdAt: oldWorkout.createdAt || new Date().toISOString(),
-              name: `Workout on ${oldWorkout.date}`,
-              exercises: [
-                {
-                  id: oldWorkout.id, // reuse id for the exercise
-                  exerciseName: oldWorkout.exerciseName,
-                  weight: oldWorkout.weight,
-                  sets: oldWorkout.sets,
-                  reps: oldWorkout.reps,
-                  weightUnit: oldWorkout.weightUnit || "lbs",
-                },
-              ],
-            };
-          });
-          return { ...persistedState, workouts: migratedWorkouts };
-        }
-        return persistedState;
-      },
     }
   )
 );
